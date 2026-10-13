@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+/* Design tokens live in tailwind.config.ts (colours, type, radii, shadows). */
+@config '../tailwind.config.ts';
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-ivory-100 font-sans text-ink antialiased;
+    min-width: 320px;
+    overflow-x: hidden;
+  }
+  /* Indic scripts need extra line height to avoid clipping matras and vowel signs. */
+  :lang(te),
+  :lang(ta),
+  :lang(kn),
+  :lang(ml),
+  :lang(hi) {
+    line-height: 1.65;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply text-ink;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-forest-500 ring-offset-2 ring-offset-ivory-100;
+  }
+  ::selection {
+    @apply bg-forest-100 text-forest-900;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-soft;
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 text-sm font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-55;
+  }
+  .btn-sm {
+    @apply min-h-[36px] rounded-lg px-3 text-[13px];
+  }
+  .btn-primary {
+    @apply bg-forest-700 text-ivory-50 shadow-soft hover:bg-forest-800 active:bg-forest-900;
+  }
+  .btn-secondary {
+    @apply border border-line-strong bg-white text-ink hover:bg-ivory-200 active:bg-ivory-300;
+  }
+  .btn-ghost {
+    @apply text-ink-soft hover:bg-ivory-200 active:bg-ivory-300;
+  }
+  .btn-danger {
+    @apply border border-chili-100 bg-chili-50 text-chili-700 hover:bg-chili-100;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-soft;
+  }
+  .input {
+    @apply block min-h-[44px] w-full rounded-xl border border-line-strong bg-white px-3.5 text-base text-ink placeholder:text-ink-faint focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/25 disabled:bg-ivory-200 sm:text-sm;
+  }
+  .input-invalid {
+    @apply border-chili-600 focus:border-chili-600 focus:ring-chili-600/20;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.08em] text-ink-muted;
+  }
+  .table-wrap {
+    @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0;
+  }
+  .data-table {
+    @apply w-full min-w-[640px] border-separate border-spacing-0 text-left text-sm;
+  }
+  .data-table th {
+    @apply border-b border-line bg-ivory-50 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-ink-muted first:rounded-tl-xl last:rounded-tr-xl;
+  }
+  .data-table td {
+    @apply border-b border-line px-3 py-3 align-top;
+  }
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+}
